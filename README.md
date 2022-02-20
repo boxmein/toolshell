@@ -69,7 +69,7 @@ TOOL_NAME=./x
 PROJECT_NAME=mitmproxy-scripts
 . ./woot.inc # change this to the right import for your repo
 
-check pip3 show mitmproxy
+check "pip3 show mitmproxy"
 tool python3 3
 
 start with python3 ./mitmfaultinjection.py
@@ -90,13 +90,13 @@ PROJECT_NAME=myrustproject
 
 tool cargo
 
-build with cargo build
+build "cargo build"
 
-run formatter with cargo fmt 
-run linter with cargo clippy 
-run check with cargo check
+run formatter "cargo fmt"
+run linter "cargo clippy"
+run check "cargo check"
 
-start with ./target/debug/myrustproject
+start "./target/debug/myrustproject"
 
 cleanup target
 
@@ -113,17 +113,17 @@ TOOL_NAME=./x
 PROJECT_NAME=mygradleproject
 . ./woot.inc # change this to the right import for your repo
 
-build with ./gradlew :build
-start with ./gradlew :run 
+build "./gradlew :build"
+start "./gradlew :run"
 
-run gradle task list with ./gradlew :tasks 
-run tests with ./gradlew :check
-run create jar with ./gradlew :jar 
-run create distribution zip with ./gradlew :distZip
-run install with ./gradlew :installDist
-run docker build with ./gradlew :docker
-run upload docker image with ./gradlew :dockerPush
-run javadoc with ./gradlew :javadoc
+run "gradle task list" "./gradlew :tasks"
+run "tests "./gradlew :check"
+run "create jar" "./gradlew :jar "
+run "create distribution zip" "./gradlew :distZip"
+run "install" "./gradlew :installDist"
+run "docker build" "./gradlew :docker"
+run "upload docker image" "./gradlew :dockerPush"
+run "javadoc" "./gradlew :javadoc"
 # add more gradle tasks here if needed
 
 cleanup build .gradle
@@ -211,13 +211,13 @@ Shows the "./x start" command in the help text.
 Syntax:
 
 ```
-start with <command>
+start "<command>"
 ```
 
 Example:
 
 ```
-start with python3 ./mycommand.py
+start "python3 ./mycommand.py"
 ```
 
 ### `build` - Define build script 
@@ -229,13 +229,13 @@ Shows the "./x build" command in the help text.
 Syntax:
 
 ```
-build with <command>
+build "<command>"
 ```
 
 Example:
 
 ```
-build with ./gradlew :build 
+build "./gradlew :build"
 ```
 
 ### `cleanup` - Define cleanup folders
@@ -279,9 +279,9 @@ run <script name> with <command>
 Example:
 
 ```
-run tests with cargo test
+run "tests" "cargo test"
 
-run dependency updates with yarn upgrade-interactive
+run "dependency updates" "yarn upgrade-interactive"
 ```
 
 ### `tool` - Check for tools
@@ -321,14 +321,14 @@ If the command returns a zero status code, silently continues.
 Syntax:
 
 ```
-check with <command>
+check "<command>"
 ```
 
 Example:
 
 ```
 # Check that docker is up.
-check with docker ps 
+check "docker ps"
 ```
 
 # Project governance

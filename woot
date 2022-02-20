@@ -16,18 +16,18 @@ set -e
 #
 #
 
-declare -a _bt_cleanup_folders
-declare -a _bt_setup_checks
-declare -A _bt_task_map
-_bt_build_command=""
-_bt_start_command=""
+declare -a _woot_cleanup_folders
+declare -a _woot_setup_checks
+declare -A _woot_task_map
+_woot_build_command=""
+_woot_start_command=""
 
 #
 #
 # Splitter
 #
 #
-_bt_split_on_with() {
+_woot_split_on_with() {
   local -a pre_with=()
   local -a post_with=()
   local with_passed=0
@@ -55,7 +55,7 @@ _bt_split_on_with() {
 #
 #
 
-_bt_check_tool_in_path() {
+_woot_check_tool_in_path() {
   tool_name="$1"
   tool_expected_version="$2"
 
@@ -77,27 +77,27 @@ _bt_check_tool_in_path() {
 #
 #
 
-_bt_set_build_command() {
-  eval $(_bt_split_on_with $*)
-  _bt_build_command="$post_with"
+_woot_set_build_command() {
+  eval $(_woot_split_on_with $*)
+  _woot_build_command="$post_with"
 }
 
-_bt_set_start_command() {
-  eval $(_bt_split_on_with $*)
-  _bt_start_command="$post_with"
+_woot_set_start_command() {
+  eval $(_woot_split_on_with $*)
+  _woot_start_command="$post_with"
 }
 
-_bt_create_task_command() {
-  eval $(_bt_split_on_with $*)
-  _bt_task_map[$pre_with]="$post_with"
+_woot_create_task_command() {
+  eval $(_woot_split_on_with $*)
+  _woot_task_map[$pre_with]="$post_with"
 }
 
-_bt_create_setup_check() {
-  _bt_setup_checks+=("$*")
+_woot_create_setup_check() {
+  _woot_setup_checks+=("$*")
 }
 
-_bt_declare_cleanup_folders() {
-  _bt_cleanup_folders=($*)
+_woot_declare_cleanup_folders() {
+  _woot_cleanup_folders=($*)
 }
 
 #
@@ -106,26 +106,26 @@ _bt_declare_cleanup_folders() {
 #
 #
 
-_bt_invoke_task() {
-  sh -c "${_bt_task_map[$*]}"
+_woot_invoke_task() {
+  sh -c "${_woot_task_map[$*]}"
 }
 
-_bt_invoke_build_command() {
-  sh -c "${_bt_build_command}"
+_woot_invoke_build_command() {
+  sh -c "${_woot_build_command}"
 }
 
-_bt_invoke_start_command() {
-  sh -c "${_bt_start_command}"
+_woot_invoke_start_command() {
+  sh -c "${_woot_start_command}"
 }
 
-_bt_invoke_cleanup() {
-  for folder in $_bt_cleanup_folders; do
+_woot_invoke_cleanup() {
+  for folder in $_woot_cleanup_folders; do
     rm -rf $folder;
   done
 }
 
-_bt_invoke_setup_checks() {
-  for check in $_bt_setup_checks; do 
+_woot_invoke_setup_checks() {
+  for check in $_woot_setup_checks; do 
     sh -c "${check}" || echo "Error: $check failed." && exit 1
   done
 }
@@ -136,7 +136,7 @@ _bt_invoke_setup_checks() {
 #
 #
 
-_bt_usage() {
+_woot_usage() {
   local toolName=${TOOL_NAME:-buildtool}
   local projectName=${PROJECT_NAME:-this project}
   cat <<EOF
@@ -152,43 +152,43 @@ usage:
     -h, --help:   get this help text
 EOF
 
-  if [[ -n "$_bt_build_command" ]]; then 
+  if [[ -n "$_woot_build_command" ]]; then 
     echo "         build:   build $projectName"
   fi
-  if [[ -n "$_bt_start_command" ]]; then 
+  if [[ -n "$_woot_start_command" ]]; then 
     echo "         start:   start the dev mode for $projectName"
   fi
-  if [[ -n "${_bt_clean_folders}" ]]; then
+  if [[ -n "${_woot_clean_folders}" ]]; then
     echo  "         clean:   remove output folders"
   fi
-  if [[ -n "${(k)_bt_task_map}" ]]; then 
+  if [[ -n "${(k)_woot_task_map}" ]]; then 
     echo "          run:   start a script for $projectName"
     echo
     echo "available scripts: "
-    for task in ${(k)_bt_task_map}; do
+    for task in ${(k)_woot_task_map}; do
       echo "$toolName $task"
     done
   fi
 }
 
-_bt_fuzzy_ui() {
-  task_to_run=$(echo ${(j:.:)${(k)_bt_task_map}} | tr '.' '\n' | fzf)
+_woot_fuzzy_ui() {
+  task_to_run=$(echo ${(j:.:)${(k)_woot_task_map}} | tr '.' '\n' | fzf)
   echo "Running ./x $task_to_run"
-  _bt_invoke_task "$task_to_run"
+  _woot_invoke_task "$task_to_run"
 }
 
-_bt_fallback() {
-  if [[ -n "${_bt_task_map[$*]}" ]]; then 
-    _bt_invoke_task "$*"
+_woot_fallback() {
+  if [[ -n "${_woot_task_map[$*]}" ]]; then 
+    _woot_invoke_task "$*"
   else
-    _bt_fuzzy_ui "$*"
+    _woot_fuzzy_ui "$*"
   fi
 }
 
 
-_bt_parse_cli_and_invoke() {
+_woot_parse_cli_and_invoke() {
 
-  _bt_invoke_setup_checks
+  _woot_invoke_setup_checks
 
   local didSomething=0
   while [[ $# -gt 0 ]]; do
@@ -197,28 +197,28 @@ _bt_parse_cli_and_invoke() {
         set -x
         ;;
       -h|--help)
-        _bt_usage
+        _woot_usage
         didSomething=1
         ;;
       build)
-        _bt_invoke_build_command
+        _woot_invoke_build_command
         didSomething=1
         ;;
       start)
-        _bt_invoke_start_command
+        _woot_invoke_start_command
         didSomething=1
         ;;
       run)
         shift
-        _bt_invoke_task "$*"
+        _woot_invoke_task "$*"
         didSomething=1
         ;;
       clean|cleanup)
-        _bt_invoke_cleanup
+        _woot_invoke_cleanup
         didSomething=1
         ;;
       *)
-        _bt_fallback "$*"
+        _woot_fallback "$*"
         didSomething=1
         ;;
     esac
@@ -226,14 +226,14 @@ _bt_parse_cli_and_invoke() {
   done
 
   if [[ "$didSomething" -ne 1 ]]; then 
-    _bt_fallback "$*"
+    _woot_fallback "$*"
   fi
 }
 
-alias build="_bt_set_build_command"
-alias run="_bt_create_task_command"
-alias cleanup="_bt_declare_cleanup_folders"
-alias woot='_bt_parse_cli_and_invoke $*'
-alias tool='_bt_check_tool_in_path'
-alias start='_bt_set_start_command'
-alias check='_bt_create_setup_check'
+alias build="_woot_set_build_command"
+alias run="_woot_create_task_command"
+alias cleanup="_woot_declare_cleanup_folders"
+alias woot='_woot_parse_cli_and_invoke $*'
+alias tool='_woot_check_tool_in_path'
+alias start='_woot_set_start_command'
+alias check='_woot_create_setup_check'

@@ -1,0 +1,17 @@
+#!/bin/zsh
+set -e
+
+TOOL_NAME="./x"
+PROJECT_NAME="example-c-project"
+
+source ../../woot
+
+tool gcc || tool --offer-install gcc || tool --offer-install clang
+tool make
+
+start "CFLAGS=-g make hello && ./hello"
+build "CFLAGS=-O3 make hello"
+
+cleanup ./hello *.o
+
+woot

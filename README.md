@@ -72,7 +72,7 @@ PROJECT_NAME=mitmproxy-scripts
 check "pip3 show mitmproxy"
 tool python3 3
 
-start with python3 ./mitmfaultinjection.py
+start "python3 ./mitmfaultinjection.py"
 
 woot
 ```

@@ -11,6 +11,7 @@ usage:
   where:
 
             -v:   enable verbose mode for the build tool
+           -vv:   enable verbose mode for the build tool and set -x
     -h, --help:   get this help text
 EOF
   _woot_help_start_command

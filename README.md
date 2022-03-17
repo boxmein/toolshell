@@ -141,12 +141,12 @@ woot
 These are current features of the shell script DSL:
 
 - It's all zsh
-- `build with <command>` for invoking build
-- `start with <command>` for starting developer mode
+- `build "<command>"` for invoking build
+- `start "<command>"` for starting developer mode
 - `cleanup ./build` for removing folders as a cleanup task
-- `run <task name> with <command>` for adding project-specific scripts
+- `run "<task name>" "<command>"` for adding project-specific scripts
 - `tool <command_name> <version_range>` for making sure tools exist
-- `check <command_name>` for free-form checks
+- `check "<command_name>"` for free-form checks
 
 ## File structure
 

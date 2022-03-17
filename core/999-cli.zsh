@@ -1,3 +1,5 @@
+_woot_verbose=false
+
 _woot_parse_cli_and_invoke() {
 
   _woot_invoke_setup_checks
@@ -5,8 +7,12 @@ _woot_parse_cli_and_invoke() {
   local didSomething=0
   while [[ $# -gt 0 ]]; do
     case $1 in
-      -v)
+      -vv)
+        _woot_verbose=true
         set -x
+        ;;
+      -v)
+        _woot_verbose=true
         ;;
       -h|--help)
         _woot_usage

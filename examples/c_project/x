@@ -1,5 +1,4 @@
 #!/bin/zsh
-set -e
 
 TOOL_NAME="./x"
 PROJECT_NAME="example-c-project"
@@ -12,6 +11,6 @@ tool make
 start "CFLAGS=-g make hello && ./hello"
 build "CFLAGS=-O3 make hello"
 
-cleanup ./hello *.o
+cleanup ./hello
 
 woot

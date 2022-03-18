@@ -1,4 +1,4 @@
-source $(dirname $0)/000-dependency_installer.zsh
+source $(dirname $0)/../library/dependency_installer.zsh
 
 _woot_check_tool_in_path() {
   local offer_install=false

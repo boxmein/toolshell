@@ -44,7 +44,18 @@ set -e
 PROJECT_NAME=myproject
 . ./woot.inc 
 
-start with yarn start
+tool yarn 1.22.0
+tool node
+
+run tests "yarn test"
+run build "yarn build"
+run publish "yarn publish"
+run lint "yarn lint"
+start "yarn start"
+
+cleanup build
+
+woot
 EOF
 ```
 
@@ -146,7 +157,15 @@ These are current features of the shell script DSL:
 - `cleanup ./build` for removing folders as a cleanup task
 - `run "<task name>" "<command>"` for adding project-specific scripts
 - `tool <command_name> <version_range>` for making sure tools exist
-- `check "<command_name>"` for free-form checks
+- `check "<command_name>"` for asserting something works before running
+- `init "<check_command>" "<fixer>"` for adding an initialization script
+
+It also includes a useful library:
+
+- Installing tools from package managers
+- Comparing file ages
+- Matching semver ranges
+- Synchronizing files to a remote server
 
 ## File structure
 

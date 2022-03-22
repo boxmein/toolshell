@@ -16,5 +16,5 @@ _woot_create_task_command() {
 }
 
 _woot_invoke_task() {
-  $SHELL -c "${_woot_task_map[$*]}"
+  ${=_woot_task_map[$*]}
 }

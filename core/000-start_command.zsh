@@ -11,5 +11,5 @@ _woot_help_start_command() {
 }
 
 _woot_invoke_start_command() {
-  $SHELL -c "${_woot_start_command}"
+  ${=_woot_start_command}
 }

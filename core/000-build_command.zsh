@@ -5,7 +5,7 @@ _woot_set_build_command() {
 }
 
 _woot_invoke_build_command() {
-  $SHELL -c "${_woot_build_command}"
+  ${=_woot_build_command}
 }
 
 _woot_help_build_command() {

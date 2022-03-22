@@ -198,7 +198,7 @@ Runs registered commands depending on the CLI arguments.
 
 Syntax:
 
-```
+```shell
 woot
 ```
 
@@ -210,13 +210,13 @@ Shows the "./x start" command in the help text.
 
 Syntax:
 
-```
+```shell
 start "<command>"
 ```
 
 Example:
 
-```
+```shell
 start "python3 ./mycommand.py"
 ```
 
@@ -228,13 +228,13 @@ Shows the "./x build" command in the help text.
 
 Syntax:
 
-```
+```shell
 build "<command>"
 ```
 
 Example:
 
-```
+```shell
 build "./gradlew :build"
 ```
 
@@ -244,13 +244,13 @@ Registers folders to delete when `./x cleanup` is run.
 
 Syntax:
 
-```
-cleanup <folder> <folder...>
+```shell
+cleanup <path> <path...>
 ```
 
 Example:
 
-```
+```shell
 cleanup target/ ./dist/ ./__cache__/
 ```
 
@@ -265,20 +265,20 @@ Custom scripts can be invoked:
 
 Custom scripts appear in the help as:
 
-```
+```shell
 additional scripts:
 ./x <script name>
 ```
 
 Syntax:
 
-```
-run <script name> with <command>
+```shell
+run "<script name>" "<command>"
 ```
 
 Example:
 
-```
+```shell
 run "tests" "cargo test"
 
 run "dependency updates" "yarn upgrade-interactive"
@@ -294,16 +294,21 @@ output to the `version_check` string. If the output of `<commandname> --version`
 does not contain the `version_check` string, shows an error message and exits
 the script.
 
+If "--offer-install" is set, and the tool is missing, will offer to install th
+tool using the system package manager by running a command like `apt-get install 
+<commandname>`.
+
 Syntax:
 
-```
-tool <commandname> <version_check>
+```shell
+tool [--offer-install] <commandname> <version_check>
 ```
 
 Example:
 
-```
+```shell
 tool yarn 1.22
+tool --offer-install make
 ```
 
 ### `check` - Generic checks
@@ -320,15 +325,59 @@ If the command returns a zero status code, silently continues.
 
 Syntax:
 
-```
+```shell
 check "<command>"
 ```
 
 Example:
 
-```
+```shell
 # Check that docker is up.
 check "docker ps"
+```
+
+### `init` - Initialization steps
+
+Runs a command to detect if the project is ready to run. If the command exits
+with a nonzero status code, it will invoke the second command to correct the 
+problem.
+
+Syntax:
+
+```shell
+init "<command>" "<command>"
+```
+
+Example:
+
+```shell
+init "_woot_is_newer_than package.json node_modules/.yarn-integrity" \
+  "yarn install --immutable"
+```
+
+## Helpers
+
+`woot` includes a number of helper functions for use in your tooling.
+
+### `_woot_is_newer_than`
+
+Checks if file A is newer than file B. Returns zero status code if file A is 
+newer.
+
+Returns status code 1 if file B does not exist, or file B is older than file A.
+
+Syntax:
+
+```shell
+_woot_is_newer_than "file_a" "file_b`
+```
+
+Example:
+
+```shell
+if _woot_is_newer_than package.json node_modules/.yarn-integrity; then 
+  yarn install --immutable
+fi
 ```
 
 # Project governance

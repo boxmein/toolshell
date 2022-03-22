@@ -1,0 +1,39 @@
+#!/bin/zsh
+
+TOOL_NAME="./x"
+PROJECT_NAME="example-js-project"
+
+source ../../woot
+
+#
+# Tools and environment checks
+#
+tool --offer-install node
+tool --offer-install yarn
+
+#
+# Dev mode initializers
+#
+
+init "_woot_is_newer_than package.json node_modules/.yarn-integrity" \
+  "yarn install --immutable"
+
+#
+# CLI configuration
+#
+
+start "yarn start"
+build "yarn build"
+
+run tests "yarn test"
+run linter "yarn lint"
+run formatter "yarn format"
+run e2e "yarn e2e"
+
+cleanup ./build ./dist
+
+
+#
+# Done!
+#
+woot

@@ -29,6 +29,7 @@ run tests "yarn test"
 run linter "yarn lint"
 run formatter "yarn format"
 run e2e "yarn e2e"
+run publish "yarn publish"
 
 cleanup ./build ./dist
 

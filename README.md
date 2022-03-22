@@ -359,7 +359,7 @@ init "_woot_is_newer_than package.json node_modules/.yarn-integrity" \
 
 `woot` includes a number of helper functions for use in your tooling.
 
-### `_woot_is_newer_than`
+### `_woot_is_newer_than` - File age comparisons
 
 Checks if file A is newer than file B. Returns zero status code if file A is 
 newer.
@@ -379,6 +379,42 @@ if _woot_is_newer_than package.json node_modules/.yarn-integrity; then
   yarn install --immutable
 fi
 ```
+
+### `_woot_fs_file_modified_time` - Get time that file was modified
+
+
+### `_woot_git_file_modified_time` - Get time that path was modified via git commit
+
+
+### `_woot_version_matches_range` - Check if version matches range
+
+Uses semver rules to determine if a version matches a specified version range.
+
+Returns status code 0 if matches, status code 1 if does not match.
+
+Supported version ranges:
+
+- Caret syntax `^1.2.0` - pass if minor or patch version is greater than or
+  equal to desired
+- Tilde syntax `~1.2.0` - pass if patch version is greater than or equal to
+  desired
+- Greater-than syntax `>=1.2.0` - pass if all versions are greater-than or equal
+  to desired
+
+Syntax:
+
+```shell
+_woot_version_matches_range "<desired_range>" "<actual_version>"
+```
+
+Example:
+
+```shell
+_woot_version_matches_range "^1.0.0" "1.2.5" # ok
+_woot_version_matches_range ">=1.0.0" "2.8.04" # ok
+_woot_version_matches_range "~12.3.2200" "1.2.3" # fail
+```
+
 
 # Project governance
 

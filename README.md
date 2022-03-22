@@ -190,7 +190,7 @@ woot
 
 ## Command reference
 
-Commands from ideal-build-tool are implemented as zsh functions and aliases.
+It's nicer to start from an example. Some are above, some are in the [examples](./examples) folder.
 
 ### `woot` - Invocation
 

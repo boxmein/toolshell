@@ -2,4 +2,6 @@
 set -e 
 cd $(dirname $0)
 mkdir -p ../build/
-cat ../core/* > ./build/woot.inc
+touch ../build/woot.inc
+cat ../library/* >> ../build/woot.inc
+cat ../core/* >> ../build/woot.inc

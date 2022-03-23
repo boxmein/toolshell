@@ -27,7 +27,7 @@ _woot_version_matches_tilde_range() {
   local desired_caret_range=$1
   local actual_version=$2
   # ~1.2.3 matches 1.0.0 - 1.0.9999
-  local version=${desired_caret_range#~}
+  local version=${desired_caret_range#'~'}
 
   local -a desired_parts=( ${=version//./ } )
   local -a actual_parts=( ${=actual_version//./ } )
@@ -105,8 +105,6 @@ _woot_version_matches_dash_range() {
 _woot_version_matches_range() {
   local desired_version_range=$1 
   local actual_version=$2
-
-  echo "desired $desired_version_range actual $actual_version"
 
   case $desired_version_range in
     '^'*)

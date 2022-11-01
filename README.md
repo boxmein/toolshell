@@ -5,8 +5,7 @@
 SCRIPT_NAME=$0
 PROJECT_NAME=toolshell
 source ./toolshell.inc
-
-
+add_check "[[ -f .yarn/install-state.gz ]]" "yarn --immutable"
 set_start_command "yarn start"
 toolshell_main
 ```

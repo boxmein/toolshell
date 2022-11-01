@@ -43,7 +43,21 @@ Skip to:
    
    toolshell_main
    ```
+
 3. Add commands, cleanup folders etc
+  ```shell
+  #!/bin/zsh
+  SCRIPT_NAME=util.zsh
+  PROJECT_NAME=mycoolapp
+  source ./toolshell.inc
+   
+  requires_tool node 16
+  set_start_command "yarn start"
+  set_build_command "yarn build"
+
+  toolshell_main
+  ```
+
 4. Done
 
 ### Installation

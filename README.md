@@ -29,17 +29,22 @@ Skip to:
 - [Documentation](#documentation)
 - [Project governance](#governance)
 
-## As a project user
+## Using toolshell for my own project
 
-You don't need to install anything, simply invoking `./x --help` will show you
-how to do things in the project.
-
-## As a project contributor
-
-Use this as a front-end for your various build tools, scripts and other tooling
-you have built up. Your stack remains, and there's no real DSL.
-
-Since it's all a shell script, you can generate scripts in a loop.
+1. Download the toolshell.inc file to your repo
+2. Create a util.zsh file that imports the toolshell.inc file and invokes toolshell_main: 
+   ```shell
+   #!/bin/zsh
+   SCRIPT_NAME=util.zsh
+   PROJECT_NAME=mycoolapp
+   source ./toolshell.inc
+   
+   # fill in later
+   
+   toolshell_main
+   ```
+3. Add commands, cleanup folders etc
+4. Done
 
 ### Installation
 

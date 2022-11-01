@@ -1,7 +1,11 @@
-alias tool='_woot_check_tool_in_path'
-alias start='_woot_set_start_command'
-alias check='_woot_create_setup_check'
-alias build="_woot_set_build_command"
-alias run="_woot_create_task_command"
-alias cleanup="_woot_declare_cleanup_folders"
-alias init='_woot_initialize'
+alias requires_tool='_toolshell_check_tool_in_path'
+
+alias add_check='_toolshell_create_setup_check'
+alias add_command="_toolshell_create_task_command"
+
+alias set_start_command='_toolshell_set_start_command'
+alias set_build_command="_toolshell_set_build_command"
+
+alias add_cleanup_dir="_toolshell_declare_cleanup_folders"
+
+alias add_initializer='_toolshell_initialize'

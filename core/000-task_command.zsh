@@ -1,20 +1,20 @@
-declare -A _woot_task_map
+declare -A _toolshell_task_map
 
-_woot_help_tasks() {
-  if [[ -n "${(k)_woot_task_map}" ]]; then 
-    echo "          run:   start a script for $projectName"
+_toolshell_help_tasks() {
+  if [[ -n "${(k)_toolshell_task_map}" ]]; then 
     echo
-    echo "available scripts: "
-    for task in ${(k)_woot_task_map}; do
-      echo "$toolName $task"
+    echo "Additional commands:"
+    echo
+    for task in ${(k)_toolshell_task_map}; do
+      echo "  $SCRIPT_NAME run $task:   alias for \"${_toolshell_task_map[$task]}\""
     done
   fi
 }
 
-_woot_create_task_command() {
-  _woot_task_map[$1]="$2"
+_toolshell_create_task_command() {
+  _toolshell_task_map[$1]="$2"
 }
 
-_woot_invoke_task() {
-  ${=_woot_task_map[$*]}
+_toolshell_invoke_task() {
+  ${=_toolshell_task_map[$*]}
 }

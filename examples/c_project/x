@@ -3,7 +3,7 @@
 TOOL_NAME="./x"
 PROJECT_NAME="example-c-project"
 
-source ../../woot
+source ../../toolshell
 
 tool gcc || tool --offer-install gcc || tool --offer-install clang
 tool make
@@ -13,4 +13,4 @@ build "CFLAGS=-O3 make hello"
 
 cleanup ./hello
 
-woot
+toolshell

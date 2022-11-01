@@ -1,4 +1,4 @@
-_woot_is_newer_than() {
+_toolshell_is_newer_than() {
   local a=$1 
   local b=$2 
 

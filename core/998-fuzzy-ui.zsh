@@ -1,22 +1,22 @@
-_woot_fuzzy_ui() {
+_toolshell_fuzzy_ui() {
   local -a tasks_to_run=()
 
-  [[ -n "$_woot_start_command" ]] && tasks_to_run+=(start)
-  [[ -n "$_woot_build_command" ]] && tasks_to_run+=(build)
+  [[ -n "$_toolshell_start_command" ]] && tasks_to_run+=(start)
+  [[ -n "$_toolshell_build_command" ]] && tasks_to_run+=(build)
 
-  for f in ${(k)_woot_task_map}; do
+  for f in ${(k)_toolshell_task_map}; do
     tasks_to_run+=($f)
   done
 
   task_to_run=$(echo $tasks_to_run | tr ' ' '\n' | fzf)
-  echo "Running ./x $task_to_run"
-  _woot_invoke_task "$task_to_run"
+  echo "Running $0 $task_to_run"
+  _toolshell_invoke_task "$task_to_run"
 }
 
-_woot_fallback() {
-  if [[ -n "${_woot_task_map[$*]}" ]]; then 
-    _woot_invoke_task "$*"
+_toolshell_fallback() {
+  if [[ -n "${_toolshell_task_map[$*]}" ]]; then 
+    _toolshell_invoke_task "$*"
   else
-    _woot_fuzzy_ui "$*"
+    _toolshell_fuzzy_ui "$*"
   fi
 }

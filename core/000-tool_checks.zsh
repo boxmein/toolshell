@@ -1,6 +1,6 @@
 source $(dirname $0)/../library/dependency_installer.zsh
 
-_woot_check_tool_in_path() {
+_toolshell_check_tool_in_path() {
   local offer_install=false
   if [[ "$1" == "--offer-install" ]]; then
     offer_install=true
@@ -14,7 +14,7 @@ _woot_check_tool_in_path() {
     echo "Tool not found: $tool_name"
     
     if [[ "$offer_install" == "true" ]]; then 
-      _woot_try_install_package "$tool_name"
+      _toolshell_try_install_package "$tool_name"
     else
       return 1
     fi

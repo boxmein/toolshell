@@ -1,5 +1,5 @@
-_woot_usage() {
-  local toolName=${TOOL_NAME:-buildtool}
+_toolshell_usage() {
+  local toolName=${SCRIPT_NAME:-toolshell}
   local projectName=${PROJECT_NAME:-this project}
   cat <<EOF
 $toolName - tooling for $projectName
@@ -14,8 +14,8 @@ usage:
            -vv:   enable verbose mode for the build tool and set -x
     -h, --help:   get this help text
 EOF
-  _woot_help_start_command
-  _woot_help_build_command
-  _woot_help_cleanup
-  _woot_help_tasks
+  _toolshell_help_start_command
+  _toolshell_help_build_command
+  _toolshell_help_cleanup
+  _toolshell_help_tasks
 }

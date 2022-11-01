@@ -7,13 +7,13 @@
   _assert_succeeds() {
     local range=$1
     local version=$2
-    _woot_version_matches_range $range $version && pass || fail
+    _toolshell_version_matches_range $range $version && pass || fail
   }
 
   _assert_fails() {
     local range=$1
     local version=$2
-    _woot_version_matches_range $range $version && fail || pass
+    _toolshell_version_matches_range $range $version && fail || pass
   }
 
   _assert_succeeds "~1.0.0" "1.0.0"
@@ -30,13 +30,13 @@
   _assert_succeeds() {
     local range=$1
     local version=$2
-    _woot_version_matches_range $range $version && pass || fail
+    _toolshell_version_matches_range $range $version && pass || fail
   }
 
   _assert_fails() {
     local range=$1
     local version=$2
-    _woot_version_matches_range $range $version && fail || pass
+    _toolshell_version_matches_range $range $version && fail || pass
   }
 
   _assert_succeeds "^1.0.0" "1.0.0"

@@ -1,5 +1,5 @@
 
-_woot_version_matches_caret_range() {
+_toolshell_version_matches_caret_range() {
   local desired_caret_range=$1 # ^1.2.3
   local actual_version=$2 
 
@@ -23,7 +23,7 @@ _woot_version_matches_caret_range() {
   fi
 }
 
-_woot_version_matches_tilde_range() {
+_toolshell_version_matches_tilde_range() {
   local desired_caret_range=$1
   local actual_version=$2
   # ~1.2.3 matches 1.0.0 - 1.0.9999
@@ -46,7 +46,7 @@ _woot_version_matches_tilde_range() {
   fi
 }
 
-_woot_version_matches_gte_range() {
+_toolshell_version_matches_gte_range() {
   local desired_caret_range=$1
   local actual_version=$2
   # >= 1.2.3 matches 1.2.3 - 9999.9999.9999
@@ -68,7 +68,7 @@ _woot_version_matches_gte_range() {
   fi
 }
 
-_woot_version_matches_lte_range() {
+_toolshell_version_matches_lte_range() {
   local desired_caret_range=$1
   local actual_version=$2
   # >= 1.2.3 matches 1.2.3 - 9999.9999.9999
@@ -90,7 +90,7 @@ _woot_version_matches_lte_range() {
   fi
 }
 
-_woot_version_matches_dash_range() {
+_toolshell_version_matches_dash_range() {
   local desired_dash_range=$1
   local actual_version=$2
 
@@ -98,33 +98,33 @@ _woot_version_matches_dash_range() {
 
   local versions=(${=desired_dash_range//-/ })
 
-  _woot_version_matches_gte_range ${versions[0]} $actual_version
-  _woot_version_matches_lte_ranmge ${versions[1]} $actual_version
+  _toolshell_version_matches_gte_range ${versions[0]} $actual_version
+  _toolshell_version_matches_lte_ranmge ${versions[1]} $actual_version
 }
 
-_woot_version_matches_range() {
+_toolshell_range_matches_version() {
   local desired_version_range=$1 
   local actual_version=$2
 
   case $desired_version_range in
     '^'*)
-      _woot_version_matches_caret_range $desired_version_range $actual_version
+      _toolshell_version_matches_caret_range $desired_version_range $actual_version
       return $?
       ;;
     '~'*)
-      _woot_version_matches_tilde_range $desired_version_range $actual_version
+      _toolshell_version_matches_tilde_range $desired_version_range $actual_version
       return $?
       ;;
     '>'*)
-      _woot_version_matches_gt_range $desired_version_range $actual_version
+      _toolshell_version_matches_gt_range $desired_version_range $actual_version
       return $?
       ;;
     '>='*)
-      _woot_version_matches_gte_range $desired_version_range $actual_version
+      _toolshell_version_matches_gte_range $desired_version_range $actual_version
       return $?
       ;;
     *-*);
-      _woot_version_matches_dash_range $desired_version_range $actual_version
+      _toolshell_version_matches_dash_range $desired_version_range $actual_version
       return $?
       ;;
   esac

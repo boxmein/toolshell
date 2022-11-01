@@ -1,4 +1,4 @@
-_woot_docker_has_image() {
+_toolshell_docker_has_image() {
   local image="$1"
   local image_id
   image_id="$(docker images "$image" --format '{{.ID}}')"
@@ -9,7 +9,7 @@ _woot_docker_has_image() {
   fi
 }
 
-_woot_docker_image_age() {
+_toolshell_docker_image_age() {
   local image="$1"
   local image_id
   image_id="$(docker images "$image" --format '{{.ID}}')"

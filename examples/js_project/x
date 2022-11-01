@@ -3,7 +3,7 @@
 TOOL_NAME="./x"
 PROJECT_NAME="example-js-project"
 
-source ../../woot
+source ../../toolshell
 
 #
 # Tools and environment checks
@@ -15,7 +15,7 @@ tool --offer-install yarn
 # Dev mode initializers
 #
 
-init "_woot_is_newer_than package.json node_modules/.yarn-integrity" \
+init "_toolshell_is_newer_than package.json node_modules/.yarn-integrity" \
   "yarn install --immutable"
 
 #
@@ -37,4 +37,4 @@ cleanup ./build ./dist
 #
 # Done!
 #
-woot
+toolshell

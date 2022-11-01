@@ -2,11 +2,17 @@
 
 ```shell
 #!/bin/zsh
+
+# add some boilerplate, and customize the help message
 SCRIPT_NAME=$0
 PROJECT_NAME=toolshell
 source ./toolshell.inc
+
+# set up your project's commands and checkers
 add_check "[[ -f .yarn/install-state.gz ]]" "yarn --immutable"
 set_start_command "yarn start"
+
+# call main to parse the cli arguments and perform the required actions
 toolshell_main
 ```
 
